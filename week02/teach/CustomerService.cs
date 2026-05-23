@@ -11,24 +11,49 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
-        Console.WriteLine("Test 1");
+        // Scenario: Add one customer and then serve the customer
+        // Expected Result: Display the customer that was added
+        //Console.WriteLine("Test 1");
+        var cs = new CustomerService(10);
+        //cs.AddNewCustomer();
+        //cs.ServeCustomer();
 
-        // Defect(s) Found: 
+        // Defect(s) Found: ServeCustomer() was removing the customer before getting it
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
-        Console.WriteLine("Test 2");
+        // Scenario: Add two customers and serve them in the right order
+        // Expected Result: It should serve the customers and display them in the same order that they were entered
+        //Console.WriteLine("Test 2");
+        //cs = new CustomerService(10);
+        //cs.AddNewCustomer();
+        //cs.AddNewCustomer();
 
-        // Defect(s) Found: 
+        //cs.ServeCustomer();
+        //cs.ServeCustomer();
+        // Defect(s) Found: None, everything works well
 
         Console.WriteLine("=================");
 
-        // Add more Test Cases As Needed Below
+        // Test 3
+        // Scenario: What would happen if I try to serve a customer if there is no customer?
+        // Expected Result: It should display a error message 
+        //cs = new CustomerService(5);
+        //cs.ServeCustomer();
+
+        // Defect(s) Found: The function should check the lenght first
+
+        // Test 4
+        //Scenario: What happen if I exceed the queue size?
+        // Expected Result: It should display a error message when exceed the queue size
+        cs = new CustomerService(2);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        Console.WriteLine($"Service Queue: {cs}");
+
+        // Defect(s) Found:
     }
 
     private readonly List<Customer> _queue = new();
@@ -67,7 +92,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +113,17 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count <= 0)
+        {
+            Console.WriteLine("There are no customers in the queue");
+        }
+        else
+        {
+            var customer = _queue[0];
+            _queue.RemoveAt(0);
+            Console.WriteLine(customer);
+            
+        }
     }
 
     /// <summary>
