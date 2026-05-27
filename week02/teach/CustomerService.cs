@@ -13,10 +13,10 @@ public class CustomerService {
         // Test 1
         // Scenario: Add one customer and then serve the customer
         // Expected Result: Display the customer that was added
-        //Console.WriteLine("Test 1");
+        Console.WriteLine("Test 1");
         var cs = new CustomerService(10);
-        //cs.AddNewCustomer();
-        //cs.ServeCustomer();
+        cs.AddNewCustomer();
+        cs.ServeCustomer();
 
         // Defect(s) Found: ServeCustomer() was removing the customer before getting it
 
@@ -25,13 +25,13 @@ public class CustomerService {
         // Test 2
         // Scenario: Add two customers and serve them in the right order
         // Expected Result: It should serve the customers and display them in the same order that they were entered
-        //Console.WriteLine("Test 2");
-        //cs = new CustomerService(10);
-        //cs.AddNewCustomer();
-        //cs.AddNewCustomer();
+        Console.WriteLine("Test 2");
+        cs = new CustomerService(10);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
 
-        //cs.ServeCustomer();
-        //cs.ServeCustomer();
+        cs.ServeCustomer();
+        cs.ServeCustomer();
         // Defect(s) Found: None, everything works well
 
         Console.WriteLine("=================");
@@ -39,8 +39,8 @@ public class CustomerService {
         // Test 3
         // Scenario: What would happen if I try to serve a customer if there is no customer?
         // Expected Result: It should display a error message 
-        //cs = new CustomerService(5);
-        //cs.ServeCustomer();
+        cs = new CustomerService(5);
+        cs.ServeCustomer();
 
         // Defect(s) Found: The function should check the lenght first
 
@@ -53,7 +53,7 @@ public class CustomerService {
         cs.AddNewCustomer();
         Console.WriteLine($"Service Queue: {cs}");
 
-        // Defect(s) Found:
+        // Defect(s) Found: none
     }
 
     private readonly List<Customer> _queue = new();
