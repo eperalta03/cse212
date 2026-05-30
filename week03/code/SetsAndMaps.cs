@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.VisualBasic;
 
 public static class SetsAndMaps
 {
@@ -21,8 +22,24 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var set = new HashSet<string>();
+        var results = new List<string>();
+
+        foreach (string word in words)
+        {
+            string newWord = $"{word[1]}{word[0]}";
+
+            if (word[0] != word[1] && set.Contains(newWord))
+            {
+                results.Add($"{newWord} & {word}");
+            }
+            else
+            {
+                set.Add(word);
+            }
+        }
+
+        return results.ToArray();
     }
 
     /// <summary>
@@ -42,7 +59,13 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3];
+
+            if(degrees.ContainsKey(degree)){
+                degrees[degree] += 1;
+            } else {
+                degrees[degree] = 1;
+            }
         }
 
         return degrees;
@@ -66,8 +89,44 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var word1Dict = new Dictionary<char, int>();
+        var word2Dict = new Dictionary<char, int>();
+
+        foreach(char i in word1.ToLower()){
+            if(i != ' '){
+                if (word1Dict.ContainsKey(i)){
+                    word1Dict[i] += 1;
+                } else {
+                    word1Dict[i] = 1;
+                }   
+            }
+        }
+
+        foreach(char i in word2.ToLower()){
+            if(i != ' '){
+                if (word2Dict.ContainsKey(i)){
+                    word2Dict[i] += 1;
+                } else {
+                    word2Dict[i] = 1;
+                } 
+            }
+        }
+
+        if(word1Dict.Count == word2Dict.Count) {  
+            foreach(var item in word1Dict){
+                if(word2Dict.ContainsKey(item.Key)){
+                    if (item.Value != word2Dict[item.Key])
+                    {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /// <summary>

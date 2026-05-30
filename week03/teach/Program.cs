@@ -1,8 +1,8 @@
 ﻿Console.WriteLine("\n======================\nUnique Letters\n======================");
-UniqueLetters.Run();
+//UniqueLetters.Run();
 
 Console.WriteLine("\n======================\nDisplay Sums\n======================");
-DisplaySums.Run();
+//DisplaySums.Run();
 
 Console.WriteLine("\n======================\nBasketball\n======================");
 Basketball.Run();
