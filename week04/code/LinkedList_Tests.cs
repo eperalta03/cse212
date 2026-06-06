@@ -3,8 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 // DO NOT MODIFY THIS FILE
 
 [TestClass]
+
 public class InsertTailTests
 {
+
     [TestMethod]
     public void InsertTail_Empty()
     {
